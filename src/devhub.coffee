@@ -4,10 +4,14 @@
 class Devhub extends Adapter
   send: (envelope, strings...) ->
     old_avatar  = @bot.avatar
+    old_room_id = @bot.room_id
     if envelope.avatar?
       @bot.avatar = envelope.avatar
+    if envelope.room_id?
+      @bot.room_id = envelope.room_id
     @bot.send str for str in strings
     @bot.avatar  = old_avatar
+    @bot.room_id = old_room_id
     @bot.reset_avatar()
 
   run: ->
